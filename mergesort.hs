@@ -3,11 +3,10 @@
 mergesort :: Ord a => [a] -> [a]
 mergesort [] = []
 mergesort [x] = [x]
-mergesort xs = merge left right
+mergesort xs = merge (mergesort left) (mergesort right)
   where
     n = length xs `div` 2
-    left = mergesort $ take n xs
-    right = mergesort $ drop n xs
+    (left, right) = splitAt n xs
 
 merge :: Ord a => [a] -> [a] -> [a]
 merge [] ys = ys
